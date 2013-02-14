@@ -134,7 +134,11 @@ def _load_workbook(wb, archive, filename, use_iterators):
         string_table = read_string_table(archive.read(ARC_SHARED_STRINGS))
     except KeyError:
         string_table = {}
-    wb.loaded_theme = archive.read(ARC_THEME)
+    try:
+        wb.loaded_theme = archive.read(ARC_THEME)
+    except:
+        pass
+
     style_table = read_style_table(archive.read(ARC_STYLE))
 
     wb.properties.excel_base_date = read_excel_base_date(xml_source=archive.read(ARC_WORKBOOK))

@@ -206,12 +206,15 @@ def fast_parse(ws, xml_source, string_table, style_table):
 
     headerFooter = root.find(QName(xmlns, 'headerFooter').text)
     if headerFooter is not None:
-        oddHeader = headerFooter.find(QName(xmlns, 'oddHeader').text)
-        if oddHeader is not None:
-            ws.header_footer.setHeader(oddHeader.text)
-        oddFooter = headerFooter.find(QName(xmlns, 'oddFooter').text)
-        if oddFooter is not None:
-            ws.header_footer.setFooter(oddFooter.text)
+        try:
+            oddHeader = headerFooter.find(QName(xmlns, 'oddHeader').text)
+            if oddHeader is not None:
+                ws.header_footer.setHeader(oddHeader.text)
+            oddFooter = headerFooter.find(QName(xmlns, 'oddFooter').text)
+            if oddFooter is not None:
+                ws.header_footer.setFooter(oddFooter.text)
+        except:
+            pass
 
 from openpyxl.reader.iter_worksheet import IterableWorksheet
 
